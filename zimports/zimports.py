@@ -6,6 +6,7 @@ import difflib
 import enum
 from functools import partial
 import importlib
+from importlib import util
 import io
 from multiprocessing import Pool
 import os
@@ -822,7 +823,7 @@ def _read_python_source(filename):
     # case if a stdin stream was sent, see #17
     with io.BytesIO(file_content) as file_:
         encoding_comment = _parse_magic_encoding_comment(file_)
-        text = importlib.util.decode_source(file_.read())
+        text = util.decode_source(file_.read())
         return text.split("\n"), encoding_comment
 
 
